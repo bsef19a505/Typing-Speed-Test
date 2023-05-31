@@ -63,5 +63,52 @@
             <button id="btn" class="main_btn" >Start</button>
         </div>
     </div>
+    <script>
+        const msgs=[
+            "Click Start to start the test",
+            "Click Done to end the test",
+            "Description of your performance is shown on the top of the Text Area after you Click Done",
+            "Keep Supporting",
+            "Good Luck for the Typing",
+            "Tips will be shown Here"
+        ];
+        const msg=document.getElementById('msg');
+        const typedWords=document.getElementById('text_area');
+        const button=document.getElementById('btn');
+        let start_time, end_time;
+
+        startGame=()=>{
+            let random_num=Math.floor(Math.random()*msgs.length);
+            msg.innerText=msgs[random_num];
+            let date=new Date();
+            start_time=date.getTime();
+            button.innerText="Done";
+            
+        }
+        endGame=()=>{
+            let date=new Date();
+            end_time=date.getTime();
+            button.innerText="Start";
+            let total_time=((end_time-start_time)/1000);
+            let totalStr=typedWords.value;
+            let word_count=totalWords(totalStr);
+        }
+        const totalWords=(str)=>{
+            let res=str.split(" ").length;
+            console.log(res);
+            return res;
+        }
+        button.addEventListener('click',function(){
+            if(this.innerText=='Start'){
+                typedWords.disabled=false;
+                startGame();
+            }else{
+                typedWords.disabled=true;
+                endGame();
+
+            }
+        })
+
+    </script>
 </body>
 </html>
