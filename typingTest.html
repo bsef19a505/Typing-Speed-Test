@@ -92,6 +92,21 @@
             let total_time=((end_time-start_time)/1000);
             let totalStr=typedWords.value;
             let word_count=totalWords(totalStr);
+            let speed=Math.floor((word_count/total_time)*60);
+            let compare=compare_words(msg.innerText,totalStr);
+            msg.innerText="You typed total "+word_count+" words at "+speed+" words per minute speed. "+compare;
+        }
+        const compare_words=(str1,str2)=>{
+            let word1=str1.split(" ");
+            let word2=str2.split(" ");
+            let count=0;
+            word1.forEach(function(item,index){
+                if(item==word2[index]){
+                    count++;
+                }
+            });
+            let error_word=word1.length-count;
+            return "You typed "+count+" correct words and "+error_word+" error words. Total number of words are "+word1.length;
         }
         const totalWords=(str)=>{
             let res=str.split(" ").length;
